@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.Web.Http.Results;
 using System.Web.Mvc;
+using JBHiFi.Models;
 
 namespace JBHiFi.Controllers
 {
@@ -10,9 +9,11 @@ namespace JBHiFi.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "JB Hi-Fi Web API";
 
-            return View();
+            var products = new ProductsController().Get() as OkNegotiatedContentResult<List<Product>>;
+
+            return View(products.Content);
         }
     }
 }
